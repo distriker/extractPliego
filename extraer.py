@@ -2,21 +2,9 @@
 # -*- coding: utf-8 -*-
 '''
 -- Extractor de datos de Pliego --
----- Cómo funciona:
-
----- Uso: python dumpimages.py
-
----- Fuentes: sitios de los que se ha extraído código o han influenciado
-considerablemente este código.
-    * Extraer datos estructurados de una página web con Python y BeautifullSoup:
-        http://bit.ly/1ZpK4Ek
-    * dumpimages.py | Stackoverflow
-        http://bit.ly/1VGtBg7
-    * Intro to Beautiful Soup
-        http://bit.ly/25G3AA7
-    * Por supuesto, mucha documentación oficial de los paquetes y funciones
-    utilizadas.
+---- Para más información, leer el README ----
 '''
+
 from bs4 import BeautifulSoup as bs
 from subprocess import call
 from urllib2 import urlopen
