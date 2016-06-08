@@ -1,10 +1,10 @@
 # Documents innecesary #
 ########################
-*.csv
+.csv
 
 # Media #
 #########
-*.jpg
+.jpg
 *.gif
 *.png
 *.svg

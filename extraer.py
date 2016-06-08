@@ -12,34 +12,41 @@ from urllib import urlretrieve
 import urlparse
 import csv, os, re, sys, time
 
-def main(url, destino):
+def extract(url, destino, urlI):
     ''' Acceso al sitio web '''
-    soup = bs(urlopen(url), 'lxml')
+    soup = bs(urlopen(url), 'html.parser')
     parsed = list(urlparse.urlparse(url))
+    ''' Descarga de las img. '''
 
-    ''' Acceso a la descr. y escritura en el csv '''
-    description = soup.findAll(True, {'class':['description']})
-    for text in description:
-        loteNum = text.contents[1]
-        loteDat = text.contents[3]
-        detalle = text.contents[6]
-        detalleE = detalle.encode("utf-8")
-        loteNumS = str(loteNum)
-        loteDatS = str(loteDat)
-        print "\n--" + loteNumS + " - " + loteDatS + ": guardado"
-        data = [loteNum, loteDat, detalleE]
-        with open(fileName, 'a') as f:
+    for img in soup.findAll(True, {'class':['list_logo']}):
+        print "Guardando imagen..."
+        print ">> %(src)s" % img
+        imgUrl = urlparse.urljoin(url, img['src'])
+        imgFile = img["src"].split("/")[-1]
+        imgDir = os.path.join(destino, imgFile)
+        urlretrieve(imgUrl, imgDir)
+        with open(fileLink, 'a') as f:
+            data = ['Link', imgUrl]
             f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             f.writerow(data)
+            print "Link guardado"
 
-    ''' Descarga de las img. '''
-    for image in soup.findAll(True, {'class':['list_logo']}):
-        print "Guardando imagen..."
-        print ">> %(src)s" % image
-        image_url = urlparse.urljoin(url, image['src'])
-        filename = image["src"].split("/")[-1]
-        outpath = os.path.join(destino, filename)
-        urlretrieve(image_url, outpath)
+    ''' Acceso a la descr. y escritura en el csv '''
+    #description = soup.findAll(True, {'class':['description']})
+    for text in soup.select(".description"):
+        loteNum = text.contents[1]
+        loteDat = text.contents[3]
+        detalle = text.contents[6].strip()
+        detalleE = detalle.encode("iso-8859-1")
+        loteNumS = str(loteNum)
+        loteDatS = str(loteDat)
+        data = [urlI, loteNum, loteDat, detalleE]
+        with open(fileData, 'a') as f:
+            f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
+            f.writerow(data)
+            tL = "\n-----------------------\n"
+            print "\n>> " + urlI + " | Lote: " + loteNumS + " - " + loteDatS
+            print "\n>> " + detalle + tL
 
 def getUrl(opt, baseUrl):
     ''' "i" es cada una de las cifras del rango (1, 2, 3, 4...);
@@ -56,11 +63,12 @@ def getUrl(opt, baseUrl):
     # Primer rango: 00001 - 00009
     if optSel == 1:
         try:
-            for i in range(0,10):
+            for i in range(1,10):
                 r = str(0).zfill(4)
-                urlI = str(i)
+                #urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
     # Segundo rang: 00010 - 00099
@@ -70,7 +78,7 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(3)
                 urlI = str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino)
         except ValueError:
             print "Introduce el rango correcto"
     # Tercero rango: 00100 - 00999
@@ -80,7 +88,7 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(2)
                 urlI = str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino)
         except ValueError:
             print "Introduce el rango correcto"
     # Cuarto rango: 01000 - 09999
@@ -90,7 +98,7 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(1)
                 urlI = str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino)
         except ValueError:
             print "Introduce el rango correcto"
     # Quinto rango: 10000 - 18510
@@ -99,7 +107,7 @@ def getUrl(opt, baseUrl):
             for i in range(10000,18510):
                 urlI = str(i)
                 url = baseUrl + urlI
-                main(url, destino)
+                extract(url, destino)
         except ValueError:
             print "Introduce el rango correcto"
     elif optSel == 0:
@@ -108,44 +116,44 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(4)
                 urlI = str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino)
+                return i
             for i in range(10,100):
                 r = str(0).zfill(3)
                 urlI = str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino)
             for i in range(100,1000):
                 r = str(0).zfill(2)
                 urlI = str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino)
             for i in range(1000,10000):
                 r = str(0).zfill(1)
                 urlI = str(i)
                 url = baseUrl + r + urlI
-                main(url, destino)
+                extract(url, destino)
             for i in range(10000,18510):
                 urlI = str(i)
                 url = baseUrl + urlI
-                main(url, destino)
+                extract(url, destino)
         except ValueError:
             print "Introduce el rango correcto"
     else:
         print "Algo ha salido mal"
 
-def _usage():
-    print "usage: python dumpimages.py http://example.com 10000 [outpath]"
-
 if __name__ == "__main__":
     print "-- Extractor de imágenes y detalles de las fichas de Pliego\n"
     doc = raw_input("Introduce el nombre para el archivo (solo nombre, no extensión): ")
     ''' Introducción de la cabecera de datos '''
-    fileName = 'datos/' + doc + '.csv'
-    print 'Su archivo se guardará en ' + fileName
+    fileData = 'datos/' + doc + '.csv'
+    fileLink = 'datos/' + doc + '-links.csv'
+    print 'Los datos extraídos se guardarán en ' + fileData
+    print 'Los links de las imágenes en ' + fileLink
     conf = raw_input("Confirma para continuar ([S]í o [N]o): ")
     if conf == "s":
-        fheader = csv.writer(open(fileName, 'a'))
-        header = ["Lote", "Dato del lote", "Detalles"]
+        fheader = csv.writer(open(fileData, 'a'))
+        header = ['Nº ficha', 'Lote', '"Rey"', 'Descripción detallada', 'Imágenes (URLs)']
         fheader.writerow(header)
         ''' Inicio del proceso: obtención de la url:
             Recomiendo que no se cambie la "baseUrl" ya que el script está hecho
