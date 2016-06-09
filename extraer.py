@@ -152,9 +152,11 @@ if __name__ == "__main__":
     print 'Los links de las imágenes en ' + fileLink
     conf = raw_input("Confirma para continuar ([S]í o [N]o): ")
     if conf == "s":
-        fheader = csv.writer(open(fileData, 'a'))
-        header = ['Nº ficha', 'Lote', '"Rey"', 'Descripción detallada', 'Imágenes (URLs)']
-        fheader.writerow(header)
+        with open(fileData, 'a') as f:
+            desc = u'Descripci\u00F3n detallada'.encode("iso-8859-1")
+            header = ['N. ficha', 'Lote', '"Rey"', desc]
+            f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
+            f.writerow(header)
         ''' Inicio del proceso: obtención de la url:
             Recomiendo que no se cambie la "baseUrl" ya que el script está hecho
             especificamente para trabajar en ese sitio web. '''
