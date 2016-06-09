@@ -26,7 +26,7 @@ def extract(url, destino, urlI):
         imgDir = os.path.join(destino, imgFile)
         urlretrieve(imgUrl, imgDir)
         with open(fileLink, 'a') as f:
-            data = ['Link', imgUrl]
+            data = [urlI, imgUrl]
             f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             f.writerow(data)
             print "Link guardado"
@@ -38,9 +38,9 @@ def extract(url, destino, urlI):
         loteDat = text.contents[3]
         detalle = text.contents[6].strip()
         detalleE = detalle.encode("iso-8859-1")
-        loteNumS = str(loteNum)
-        loteDatS = str(loteDat)
-        data = [urlI, loteNum, loteDat, detalleE]
+        loteNumS = str(loteNum).lstrip("<b>i>").rstrip("</i>b>")
+        loteDatS = str(loteDat).lstrip("<span>").rstrip("</span>")
+        data = [urlI, loteNumS, loteDatS, detalleE]
         with open(fileData, 'a') as f:
             f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             f.writerow(data)
@@ -169,3 +169,4 @@ if __name__ == "__main__":
         print "Se reiniciará el script en 5 segundos...\n"
         time.sleep(5)
         reset = os.execv(__file__, sys.argv)
+sys.exit('¡Fin de la extracción!\n')
