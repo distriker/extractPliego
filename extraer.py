@@ -65,7 +65,6 @@ def getUrl(opt, baseUrl):
         try:
             for i in range(1,10):
                 r = str(0).zfill(4)
-                #urlI = str(i)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino, urlI)
@@ -76,7 +75,7 @@ def getUrl(opt, baseUrl):
         try:
             for i in range(10,100):
                 r = str(0).zfill(3)
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino)
         except ValueError:
@@ -86,7 +85,7 @@ def getUrl(opt, baseUrl):
         try:
             for i in range(100,1000):
                 r = str(0).zfill(2)
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino)
         except ValueError:
@@ -96,7 +95,7 @@ def getUrl(opt, baseUrl):
         try:
             for i in range(1000,10000):
                 r = str(0).zfill(1)
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino)
         except ValueError:
@@ -105,7 +104,7 @@ def getUrl(opt, baseUrl):
     elif optSel == 5:
         try:
             for i in range(10000,18510):
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino)
         except ValueError:
@@ -114,27 +113,27 @@ def getUrl(opt, baseUrl):
         try:
             for i in range(0,10):
                 r = str(0).zfill(4)
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino)
                 return i
             for i in range(10,100):
                 r = str(0).zfill(3)
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino)
             for i in range(100,1000):
                 r = str(0).zfill(2)
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino)
             for i in range(1000,10000):
                 r = str(0).zfill(1)
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + r + urlI
                 extract(url, destino)
             for i in range(10000,18510):
-                urlI = str(i)
+                urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino)
         except ValueError:
