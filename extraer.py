@@ -10,7 +10,7 @@ from subprocess import call
 from urllib2 import urlopen
 from urllib import urlretrieve
 import urlparse
-import csv, os, re, sys, time
+import csv, argparse, os, re, sys, time, wx
 
 def extract(url, destino, urlI):
     ''' Acceso al sitio web '''
@@ -26,7 +26,7 @@ def extract(url, destino, urlI):
         imgDir = os.path.join(destino, imgFile)
         urlretrieve(imgUrl, imgDir)
         with open(fileLink, 'a') as f:
-            data = [urlI, imgUrl]
+            data = [urlI, imgFile, imgUrl]
             f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             f.writerow(data)
             print "Link guardado"
@@ -77,7 +77,7 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(3)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
     # Tercero rango: 00100 - 00999
@@ -87,7 +87,7 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(2)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
     # Cuarto rango: 01000 - 09999
@@ -97,7 +97,7 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(1)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
     # Quinto rango: 10000 - 18510
@@ -106,7 +106,7 @@ def getUrl(opt, baseUrl):
             for i in range(10000,18510):
                 urlI = r + str(i)
                 url = baseUrl + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
     elif optSel == 0:
@@ -115,27 +115,27 @@ def getUrl(opt, baseUrl):
                 r = str(0).zfill(4)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
                 return i
             for i in range(10,100):
                 r = str(0).zfill(3)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
             for i in range(100,1000):
                 r = str(0).zfill(2)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
             for i in range(1000,10000):
                 r = str(0).zfill(1)
                 urlI = r + str(i)
                 url = baseUrl + r + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
             for i in range(10000,18510):
                 urlI = r + str(i)
                 url = baseUrl + urlI
-                extract(url, destino)
+                extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
     else:
@@ -144,7 +144,7 @@ def getUrl(opt, baseUrl):
 if __name__ == "__main__":
     print "-- Extractor de imágenes y detalles de las fichas de Pliego\n"
     doc = raw_input("Introduce el nombre para el archivo (solo nombre, no extensión): ")
-    ''' Introducción de la cabecera de datos '''
+    '''Introducción de la cabecera de datos '''
     fileData = 'datos/' + doc + '.csv'
     fileLink = 'datos/' + doc + '-links.csv'
     print 'Los datos extraídos se guardarán en ' + fileData
