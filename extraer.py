@@ -26,7 +26,7 @@ def extract(url, destino, urlI):
         imgDir = os.path.join(destino, imgFile)
         urlretrieve(imgUrl, imgDir)
         with open(fileLink, 'a') as f:
-            data = [urlI, imgFile, imgUrl]
+            data = [urlI, url, imgFile, imgUrl]
             f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             f.writerow(data)
             print "Link guardado"
@@ -64,9 +64,9 @@ def getUrl(opt, baseUrl):
     if optSel == 1:
         try:
             for i in range(1,10):
-                r = str(0).zfill(4)
+                r = str().zfill(4)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
@@ -76,7 +76,7 @@ def getUrl(opt, baseUrl):
             for i in range(10,100):
                 r = str(0).zfill(3)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
@@ -86,7 +86,7 @@ def getUrl(opt, baseUrl):
             for i in range(100,1000):
                 r = str(0).zfill(2)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
@@ -96,7 +96,7 @@ def getUrl(opt, baseUrl):
             for i in range(1000,10000):
                 r = str(0).zfill(1)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
@@ -114,23 +114,23 @@ def getUrl(opt, baseUrl):
             for i in range(0,10):
                 r = str(0).zfill(4)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
                 return i
             for i in range(10,100):
                 r = str(0).zfill(3)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
             for i in range(100,1000):
                 r = str(0).zfill(2)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
             for i in range(1000,10000):
                 r = str(0).zfill(1)
                 urlI = r + str(i)
-                url = baseUrl + r + urlI
+                url = baseUrl + urlI
                 extract(url, destino, urlI)
             for i in range(10000,18510):
                 urlI = r + str(i)
