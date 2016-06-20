@@ -28,7 +28,7 @@ def extract(url, destino, urlI):
             loteNum = text.contents[1]
             loteDat = text.contents[3]
             detalle = text.contents[6].strip()
-            detalleE = detalle.encode("iso-8859-1")
+            detalleE = detalle.encode("utf-8")
             loteNumS = str(loteNum).lstrip("<b>i>").rstrip("</i>b>")
             loteDatS = str(loteDat).lstrip("<span>").rstrip("</span>")
             loteCara = str(imgFile).strip("0123456789_.jpg=,").capitalize()
@@ -145,7 +145,6 @@ if __name__ == "__main__":
     fileData = 'datos/' + doc + '.csv'
     fileLink = 'datos/' + doc + '-links.csv'
     print 'Los datos extraídos se guardarán en ' + fileData
-    print 'Los links de las imágenes en ' + fileLink
     conf = raw_input("Confirma para continuar ([S]í o [N]o): ")
     if conf == "s":
         with open(fileData, 'a') as f:
