@@ -16,8 +16,8 @@ def extract(url, destino, urlI):
     ''' Acceso al sitio web '''
     soup = bs(urlopen(url), 'html.parser')
     parsed = list(urlparse.urlparse(url))
-    ''' Descarga de las img. '''
 
+    ''' Descarga de las imágenes y extración de los datos '''
     for img in soup.findAll(True, {'class':['list_logo']}):
         print "Guardando imagen..."
         print ">> %(src)s" % img
@@ -25,28 +25,21 @@ def extract(url, destino, urlI):
         imgFile = img["src"].split("/")[-1]
         imgDir = os.path.join(destino, imgFile)
         urlretrieve(imgUrl, imgDir)
-        with open(fileLink, 'a') as f:
-            data = [urlI, url, imgFile, imgUrl]
-            f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
-            f.writerow(data)
-            print "Link guardado"
-
-    ''' Acceso a la descr. y escritura en el csv '''
-    #description = soup.findAll(True, {'class':['description']})
-    for text in soup.select(".description"):
-        loteNum = text.contents[1]
-        loteDat = text.contents[3]
-        detalle = text.contents[6].strip()
-        detalleE = detalle.encode("iso-8859-1")
-        loteNumS = str(loteNum).lstrip("<b>i>").rstrip("</i>b>")
-        loteDatS = str(loteDat).lstrip("<span>").rstrip("</span>")
-        data = [urlI, loteNumS, loteDatS, detalleE]
-        with open(fileData, 'a') as f:
-            f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
-            f.writerow(data)
-            tL = "\n-----------------------\n"
-            print "\n>> " + urlI + " | Lote: " + loteNumS + " - " + loteDatS
-            print "\n>> " + detalle + tL
+        for text in soup.select(".description"):
+            loteNum = text.contents[1]
+            loteDat = text.contents[3]
+            detalle = text.contents[6].strip()
+            detalleE = detalle.encode("iso-8859-1")
+            loteNumS = str(loteNum).lstrip("<b>i>").rstrip("</i>b>")
+            loteDatS = str(loteDat).lstrip("<span>").rstrip("</span>")
+            loteCara = str(imgFile).strip("0123456789_.jpg=,").capitalize()
+            data = [urlI, loteNumS, loteCara, loteDatS, detalleE, url, imgFile, imgUrl]
+            with open(fileData, 'a') as f:
+                f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
+                f.writerow(data)
+                tL = "\n-----------------------\n"
+                print "\n>> " + urlI + " | Lote: " + loteNumS + " - " + loteDatS
+                print "\n>> " + detalle + tL
 
 def getUrl(opt, baseUrl):
     ''' "i" es cada una de las cifras del rango (1, 2, 3, 4...);
@@ -153,7 +146,7 @@ if __name__ == "__main__":
     if conf == "s":
         with open(fileData, 'a') as f:
             desc = u'Descripci\u00F3n detallada'.encode("iso-8859-1")
-            header = ['N. ficha', 'Lote', '"Rey"', desc]
+            header = ['N. ficha', 'Lote', 'Cara', '"Rey"', desc, 'URL', 'Imagen', 'URL de la imagen']
             f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             f.writerow(header)
         ''' Inicio del proceso: obtención de la url:
