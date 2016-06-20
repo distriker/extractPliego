@@ -16,8 +16,7 @@ Su uso es muy sencillo pero hay que tener algunas cosas en cuenta. Para iniciarl
 ### Tareas pendientes:
 - **Perfeccionar los rangos**. Ahora mismo estoy comprobando que se extraen correctamente los datos y que todas las fichas tienen contenido y no están vacías. En algunos casos hay fichas vacías y por lo tanto, no extrae imágenes pero si el texto del div, porque existe; por lo tanto, es necesario comprobar hasta que ficha hay datos, para no obtener datos inútiles.
 - **Unificar el proceso**. Evitar tener que señalar que rango usar y unificarlo en uno mismo que extraiga todo de una vez. He trabajado un poco en esta cuestión y no es complicado, pero antes de continuar con ello hay que resolver el problema de las fichas vacías.
-- **Limpiar el texto obtenido**. Eliminar las etiquetas html con las que se extrae el texto, además de grandes espacios innecesarios.
-- **Automatizar la subida**. Para que el script no se quede simplemente en un extractor, en el caso de que fuese seguro y se pudiese realizar sin perjuicio alguno, se podría automatizar la subida (supervisada quizás) a Commons.
+- **Automatizar la subida a Commons**. Para que el script no se quede simplemente en un extractor, en el caso de que fuese seguro y se pudiese realizar sin perjuicio alguno, se podría automatizar la subida (supervisada quizás) a Commons.
 
 ### Fuentes.
 Determinados sitios de los que se ha extraído código o han influenciado.

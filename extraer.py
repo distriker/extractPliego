@@ -9,8 +9,7 @@ from bs4 import BeautifulSoup as bs
 from subprocess import call
 from urllib2 import urlopen
 from urllib import urlretrieve
-import urlparse
-import csv, argparse, os, re, sys, time, wx
+import csv, argparse, os, re, sys, time, urlparse
 
 def extract(url, destino, urlI):
     ''' Acceso al sitio web '''
@@ -76,7 +75,12 @@ def getUrl(opt, baseUrl):
     # Tercero rango: 00100 - 00999
     elif optSel == 3:
         try:
-            for i in range(100,1000):
+            for i in range(100,168):
+                r = str(0).zfill(2)
+                urlI = r + str(i)
+                url = baseUrl + urlI
+                extract(url, destino, urlI)
+            for i in range(169,1000):
                 r = str(0).zfill(2)
                 urlI = r + str(i)
                 url = baseUrl + urlI
