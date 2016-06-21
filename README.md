@@ -1,21 +1,38 @@
 # extractPliego | Extractor de datos de Pliego
-Script que permite extraer las imágenes y textos del sitio web de Numismática Pliego | Desarrollado para una tarea de Wikimedia España
+Script que permite extraer los datos e imágenes de las fichas de las subastas de monedas y billetes realizadas en el sitio web de Numismática Pliego.
 
+Desarrollado para una tarea de [Wikimedia España](https://wikimedia.es).
+
+**Tabla de contenido**
+- [Cómo funciona.](#cmo-funciona)
+- [Uso:](#uso)
+	- [Problemas no resueltos a tener en cuenta](#problemas-no-resueltos-a-tener-en-cuenta)
+- [Tareas pendientes:](#tareas-pendientes)
+- [Fuentes.](#fuentes)
+----
 ### Cómo funciona.
-El script funciona a partir de un archivo, **extraer.py**, y dos carpetas, "datos" e "img". La URL de la que extrae todos los datos es `subastas.numismaticaycoleccionismo.es/index/viewBatch/[NÚMERO DE FICHA]`, qué es donde guardan las imágenes. El número de ficha se consigue a partir de rangos concretos (00001 al 00010, 00010 al 00099, 00100 al 00999, 01000 al 09999 y 10000 al 18510) que determinan la ficha que hay que abrir y extraer.
+El script consta de un único archivo encargado de la extracción,  **extraer.py**, y dos carpetas, "**datos**" e "**img**", donde se almacenan los datos e imágenes extraídas de las fichas.
 
-Crea un archivo csv en la carpeta "datos", donde guarda todos los textos que extrae de cada ficha buscando elementos con la clase "description", que en este caso es un div que contiene el número y la descripción del lote; al mismo tiempo extrae las imágenes con la clase "list_logo" (1 o 2 de media) de las fichas.
+Los datos se extraen a partir de la URL base de las fichas:
+`subastas.numismaticaycoleccionismo.es/index/viewBatch/[NÚMERO DE FICHA]`
+
+El número de ficha se consigue a partir de rangos concretos (00001 al 00010, 00010 al 00099, 00100 al 00999, 01000 al 09999 y 10000 al 18510) que determinan de que ficha hay que extraer los datos.
+
+Extrae una a una todas las imágenes (normalmente una o dos) con la clase `list_logo` de cada ficha. Por cada imagen que extrae introduce una fila en el CSV, donde introduce los datos de la ficha. *Véase [README de la carpeta "datos"](https://github.com/distriker/extractPliego/tree/master/datos)*.
 
 ### Uso:
-Su uso es muy sencillo pero hay que tener algunas cosas en cuenta. Para iniciarlo se utiliza el comando `python extraer.py` en la misma carpeta del script:
-1. Te pide que introduzcas el nombre para el archivo que se va a crear y en el que se guardarán los textos. No pongas ninguna extensión.
-2. Te dice donde se guardará (`/datos/[NOMBRE ASIGNADO].csv`), y te pide que confirmes pulsando `s` o `n`.
-3. Luego te pide elegir entre los rangos que te muestra.
-4. A partir de aquí ya no necesita más intervención humana, extraerá de todas las fichas los textos y las imágenes.
+1. [Descarga el script](https://github.com/distriker/extractPliego/archive/master.zip) y extráelo.
+2. Abre la terminal/cmd donde hayas extraído el script e introduce: `python extraer.py`
+3. Introduce el nombre para el archivo que se creará y en el que se guardarán los datos extraídos. **No pongas ninguna extensión** (se asignará automáticamente su correspondiente .csv).
+4. Para estar seguro, te pide que confirmes si el nombre asignado (`/datos/[NOMBRE ASIGNADO].csv`) es correcto. Introduce `s` o `n`.
+5. Luego te pide elegir entre los rangos que te muestra.
+6. A partir de aquí ya no necesita más intervención humana. En el caso de que "termine" sin extraer todos los datos o emita algún error, [házmelo saber](https://github.com/distriker/extractPliego/issues).
+#### Problemas no resueltos a tener en cuenta
+He detectado que el script tiene problemas al extraer dos fichas concretas: [00168](http://subastas.numismaticaycoleccionismo.es/index/viewBatch/00168) y [10371](http://subastas.numismaticaycoleccionismo.es/index/viewBatch/10371). El problema deriva en que al llegar a ambas fichas el script colapsa y deja de extraer datos, teniendo que pararlo e iniciarlo de nuevo. Para que esto no suceda **ambas fichas están excluidas de la extracción**, hasta que consiga arreglarlo.
 
 ### Tareas pendientes:
-- **Perfeccionar los rangos**. Ahora mismo estoy comprobando que se extraen correctamente los datos y que todas las fichas tienen contenido y no están vacías. En algunos casos hay fichas vacías y por lo tanto, no extrae imágenes pero si el texto del div, porque existe; por lo tanto, es necesario comprobar hasta que ficha hay datos, para no obtener datos inútiles.
-- **Unificar el proceso**. Evitar tener que señalar que rango usar y unificarlo en uno mismo que extraiga todo de una vez. He trabajado un poco en esta cuestión y no es complicado, pero antes de continuar con ello hay que resolver el problema de las fichas vacías.
+- **Arreglar el problema de las fichas *00168* y *10371***. Tengo la hipótesis de que en el caso de la *10371* podría deberse a que no hay imagen que extraer. En lo que respecta a la *00168*, desconozco absolutamente la causa.
+- **Unificar el proceso (*pendiente de realizar una prueba para comprobar que funciona correctamente*)**. Evitar tener que señalar que rango usar y unificarlo en uno mismo que extraiga todo de una vez. He trabajado un poco en esta cuestión y no es complicado, pero antes de continuar con ello hay que resolver el problema de las fichas vacías.
 - **Automatizar la subida a Commons**. Para que el script no se quede simplemente en un extractor, en el caso de que fuese seguro y se pudiese realizar sin perjuicio alguno, se podría automatizar la subida (supervisada quizás) a Commons.
 
 ### Fuentes.

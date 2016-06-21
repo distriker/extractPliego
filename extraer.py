@@ -179,7 +179,7 @@ if __name__ == "__main__":
             Recomiendo que no se cambie la "baseUrl" ya que el script está hecho
             especificamente para trabajar en ese sitio web. '''
         baseUrl = "http://subastas.numismaticaycoleccionismo.es/index/viewBatch/"
-        getUrl("\nElige: 1 [00001 al 00010], 2 [00010 al 00099], \n       3 [00100 al 00999], 4 [01000 al 09999] o 5 [10000 al 18510]: ", baseUrl)
+        getUrl("\nElige: 1 [00001 - 00010], 2 [00010 - 00099], \n       3 [00100 - 0167 | 00169 - 00595], 4 [05041 - 07003 | 09364 - 09999], \n       5 [10000 - 10370 | 10372 - 18510], o 6 [TODAS las fichas]: ", baseUrl)
     elif conf == "n":
         print "Se reiniciará el script en 5 segundos...\n"
         time.sleep(5)
