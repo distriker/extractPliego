@@ -26,7 +26,7 @@ Extrae una a una todas las imágenes (normalmente una o dos) con la clase `list_
 2. Abre la terminal/cmd donde hayas extraído el script e introduce: `python extraer.py`
 3. Introduce el nombre para el archivo que se creará y en el que se guardarán los datos extraídos. **No pongas ninguna extensión** (se asignará automáticamente su correspondiente .csv).
 4. Para estar seguro, te pide que confirmes si el nombre asignado (`/datos/[NOMBRE ASIGNADO].csv`) es correcto. Introduce `s` o `n`.
-5. Luego te pide elegir entre los rangos que te muestra.
+5. Luego te pide elegir entre los rangos que te muestra ([1] [2] [3] [4] [5]) o extraer todos los datos e imágenes de las fichas ([6]).
 6. A partir de aquí ya no necesita más intervención humana. En el caso de que "termine" sin extraer todos los datos o emita algún error, [házmelo saber](https://github.com/distriker/extractPliego/issues).
 
 #### Problemas no resueltos a tener en cuenta
@@ -34,7 +34,6 @@ He detectado que el script tiene problemas al extraer dos fichas concretas: [001
 
 ### Tareas pendientes:
 - **Arreglar el problema de las fichas *00168* y *10371***. Tengo la hipótesis de que en el caso de la *10371* podría deberse a que no hay imagen que extraer. En lo que respecta a la *00168*, desconozco absolutamente la causa.
-- **Unificar el proceso (*pendiente de realizar una prueba para comprobar que funciona correctamente*)**. Evitar tener que señalar que rango usar y unificarlo en uno mismo que extraiga todo de una vez. He trabajado un poco en esta cuestión y no es complicado, pero antes de continuar con ello hay que resolver el problema de las fichas vacías.
 - **Automatizar la subida a Commons**. Para que el script no se quede simplemente en un extractor, en el caso de que fuese seguro y se pudiese realizar sin perjuicio alguno, se podría automatizar la subida (supervisada quizás) a Commons.
 
 ### Fuentes.
