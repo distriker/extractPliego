@@ -1,4 +1,4 @@
-# extractPliego | Extractor de datos de Pliego
+# extractPliego | Extractor de datos de Numismática Pliego
 Script que permite extraer los datos e imágenes de las fichas de las subastas de monedas y billetes realizadas en el sitio web de Numismática Pliego.
 
 Desarrollado para una tarea de [Wikimedia España](https://wikimedia.es).
@@ -26,14 +26,14 @@ Extrae una a una todas las imágenes (normalmente una o dos) con la clase `list_
 2. Abre la terminal/cmd donde hayas extraído el script e introduce: `python extraer.py`
 3. Introduce el nombre para el archivo que se creará y en el que se guardarán los datos extraídos. **No pongas ninguna extensión** (se asignará automáticamente su correspondiente .csv).
 4. Para estar seguro, te pide que confirmes si el nombre asignado (`/datos/[NOMBRE ASIGNADO].csv`) es correcto. Introduce `s` o `n`.
-5. Luego te pide elegir entre los rangos que te muestra ([1] [2] [3] [4] [5]) o extraer todos los datos e imágenes de las fichas ([6]).
+5. Luego te pide elegir entre los rangos que te muestra ([1] [2] [3] [4] [5]) o extraer todos los datos e imágenes de las fichas ([6]); **ten en cuenta que la prueba del rango 6 tardó 3 horas y 42 minutos**.
 6. A partir de aquí ya no necesita más intervención humana. En el caso de que "termine" sin extraer todos los datos o emita algún error, [házmelo saber](https://github.com/distriker/extractPliego/issues).
 
 #### Problemas no resueltos a tener en cuenta
 He detectado que el script tiene problemas al extraer dos fichas concretas: [00168](http://subastas.numismaticaycoleccionismo.es/index/viewBatch/00168) y [10371](http://subastas.numismaticaycoleccionismo.es/index/viewBatch/10371). El problema deriva en que al llegar a ambas fichas el script colapsa y deja de extraer datos, teniendo que pararlo e iniciarlo de nuevo. Para que esto no suceda **ambas fichas están excluidas de la extracción**, hasta que consiga arreglarlo.
 
 ### Tareas pendientes:
-- **Arreglar el problema de las fichas *00168* y *10371***. Tengo la hipótesis de que en el caso de la *10371* podría deberse a que no hay imagen que extraer. En lo que respecta a la *00168*, desconozco absolutamente la causa.
+- **Arreglar el problema de las fichas 00168 y 10371**. Tengo la hipótesis de que en el caso de la *10371* podría deberse a que no hay imagen que extraer. En lo que respecta a la *00168*, desconozco absolutamente la causa.
 - **Automatizar la subida a Commons**. Para que el script no se quede simplemente en un extractor, en el caso de que fuese seguro y se pudiese realizar sin perjuicio alguno, se podría automatizar la subida (supervisada quizás) a Commons.
 
 ### Fuentes.
