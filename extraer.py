@@ -72,7 +72,7 @@ def getUrl(opt, baseUrl):
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
-    # Tercero rango: 00100 - 00999
+    # Tercero rango: 00100 - 0167 | 00169 - 00595
     elif optSel == 3:
         try:
             for i in range(100,168):
@@ -80,57 +80,80 @@ def getUrl(opt, baseUrl):
                 urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
-            for i in range(169,1000):
+            for i in range(169,596):
                 r = str(0).zfill(2)
                 urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
-    # Cuarto rango: 01000 - 09999
+    # Cuarto rango: 05041 - 07003 | 09364 - 09999
     elif optSel == 4:
         try:
-            for i in range(1000,10000):
+            for i in range(5041,7003):
+                r = str(0).zfill(1)
+                urlI = r + str(i)
+                url = baseUrl + urlI
+                extract(url, destino, urlI)
+            for i in range(9364,9999):
                 r = str(0).zfill(1)
                 urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
-    # Quinto rango: 10000 - 18510
+    # Quinto rango: 10000 - 10370 | 10372 - 18510
     elif optSel == 5:
         try:
-            for i in range(10000,18510):
-                urlI = r + str(i)
+            for i in range(10000,10370):
+                urlI = str(i)
+                url = baseUrl + urlI
+                extract(url, destino, urlI)
+            for i in range(10370,18510):
+                urlI = str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
             print "Introduce el rango correcto"
-    elif optSel == 0:
+    # Sexto rango: extrae todos los datos e imágenes
+    elif optSel == 6:
         try:
             for i in range(0,10):
                 r = str(0).zfill(4)
                 urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
-                return i
             for i in range(10,100):
                 r = str(0).zfill(3)
                 urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
-            for i in range(100,1000):
+            for i in range(100,168):
                 r = str(0).zfill(2)
                 urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
-            for i in range(1000,10000):
+            for i in range(169,596):
+                r = str(0).zfill(2)
+                urlI = r + str(i)
+                url = baseUrl + urlI
+                extract(url, destino, urlI)
+            for i in range(5041,7003):
                 r = str(0).zfill(1)
                 urlI = r + str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
-            for i in range(10000,18510):
+            for i in range(9364,9999):
+                r = str(0).zfill(1)
                 urlI = r + str(i)
+                url = baseUrl + urlI
+                extract(url, destino, urlI)
+            for i in range(10000,10370):
+                urlI = str(i)
+                url = baseUrl + urlI
+                extract(url, destino, urlI)
+            for i in range(10370,18510):
+                urlI = str(i)
                 url = baseUrl + urlI
                 extract(url, destino, urlI)
         except ValueError:
@@ -148,7 +171,7 @@ if __name__ == "__main__":
     conf = raw_input("Confirma para continuar ([S]í o [N]o): ")
     if conf == "s":
         with open(fileData, 'a') as f:
-            desc = u'Descripci\u00F3n detallada'.encode("iso-8859-1")
+            desc = u'Descripci\u00F3n detallada'.encode("utf-8")
             header = ['N. ficha', 'Lote', 'Cara', '"Rey"', desc, 'URL', 'Imagen', 'URL de la imagen']
             f = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             f.writerow(header)
