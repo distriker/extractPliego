@@ -10,6 +10,7 @@ Desarrollado para una tarea de [Wikimedia España](https://wikimedia.es).
 - [Tareas pendientes:](#tareas-pendientes)
 - [Fuentes.](#fuentes)
 ----
+
 ### Cómo funciona.
 El script consta de un único archivo encargado de la extracción,  **extraer.py**, y dos carpetas, "**datos**" e "**img**", donde se almacenan los datos e imágenes extraídas de las fichas.
 
