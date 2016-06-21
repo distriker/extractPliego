@@ -28,6 +28,7 @@ Extrae una a una todas las imágenes (normalmente una o dos) con la clase `list_
 4. Para estar seguro, te pide que confirmes si el nombre asignado (`/datos/[NOMBRE ASIGNADO].csv`) es correcto. Introduce `s` o `n`.
 5. Luego te pide elegir entre los rangos que te muestra.
 6. A partir de aquí ya no necesita más intervención humana. En el caso de que "termine" sin extraer todos los datos o emita algún error, [házmelo saber](https://github.com/distriker/extractPliego/issues).
+
 #### Problemas no resueltos a tener en cuenta
 He detectado que el script tiene problemas al extraer dos fichas concretas: [00168](http://subastas.numismaticaycoleccionismo.es/index/viewBatch/00168) y [10371](http://subastas.numismaticaycoleccionismo.es/index/viewBatch/10371). El problema deriva en que al llegar a ambas fichas el script colapsa y deja de extraer datos, teniendo que pararlo e iniciarlo de nuevo. Para que esto no suceda **ambas fichas están excluidas de la extracción**, hasta que consiga arreglarlo.
 
