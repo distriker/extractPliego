@@ -6,10 +6,9 @@
 '''
 
 from bs4 import BeautifulSoup as bs
-from subprocess import call
 from urllib2 import urlopen
 from urllib import urlretrieve
-import csv, argparse, os, re, sys, time, urlparse
+import csv, os, sys, time, urlparse
 
 def extract(url, destino, urlI):
     ''' Acceso al sitio web '''

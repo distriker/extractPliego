@@ -34,7 +34,9 @@ He detectado que el script tiene problemas al extraer dos fichas concretas: [001
 
 ### Tareas pendientes:
 - **Arreglar el problema de las fichas 00168 y 10371**. Tengo la hipótesis de que en el caso de la *10371* podría deberse a que no hay imagen que extraer. En lo que respecta a la *00168*, desconozco absolutamente la causa.
-- **Automatizar la subida a Commons**. Para que el script no se quede simplemente en un extractor, en el caso de que fuese seguro y se pudiese realizar sin perjuicio alguno, se podría automatizar la subida (supervisada quizás) a Commons.
+- **Comprobación**. Comprobar si las monedas descargadas están ya subidas a Commons y señalarlo en el CSV (ya subida/no subida).
+- **Fusionar las imágenes**. Utilizar [PIL](http://pythonware.com/products/pil/) o [Pillow](http://python-pillow.org/) para unir en una misma imagen los anversos y reversos.
+- **Pre-procesar la información**. Generar un modelo de ficha para Commons (descripción, autor, fuente...) a partir de los datos extraídos.
 
 ### Fuentes.
 Determinados sitios de los que se ha extraído código o han influenciado.
