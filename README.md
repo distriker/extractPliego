@@ -37,6 +37,7 @@ He detectado que el script tiene problemas al extraer dos fichas concretas: [001
 - **Comprobación**. Comprobar si las monedas descargadas están ya subidas a Commons y señalarlo en el CSV (ya subida/no subida).
 - **Fusionar las imágenes**. Utilizar [PIL](http://pythonware.com/products/pil/) o [Pillow](http://python-pillow.org/) para unir en una misma imagen los anversos y reversos.
 - **Pre-procesar la información**. Generar un modelo de ficha para Commons (descripción, autor, fuente...) a partir de los datos extraídos.
+- **Adaptar CSV para subirlo a Commons con [CSV a Commons](https://github.com/davidabian/csv-a-commons)**. Unificar en una única línea aquellos datos extraídos para anverso y reverso.
 
 ### Fuentes.
 Determinados sitios de los que se ha extraído código o han influenciado.
