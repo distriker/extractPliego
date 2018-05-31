@@ -1,4 +1,10 @@
 # extractPliego | Extractor de datos de Numismática Pliego
+
+**Mejoras pendientes**
+  - Reescribirlo como Python 3.
+  - Interfaz gráfica sencilla.
+  - Integración con [Pattypan](https://github.com/yarl/pattypan)
+
 Script que permite extraer los datos e imágenes de las fichas de las subastas de monedas y billetes realizadas en el sitio web de Numismática Pliego.
 
 Desarrollado para una tarea de [Wikimedia España](https://wikimedia.es).
